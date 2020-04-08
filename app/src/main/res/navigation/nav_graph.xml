@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="br.com.githubfinder.ui.screens.search.SearchFragment"
+        android:label=" "
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_userFragment"
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="br.com.githubfinder.ui.screens.user.UserFragment"
+        android:label="Sobre"
+        tools:layout="@layout/fragment_user">
+        <action
+            android:id="@+id/action_userFragment_to_repositoryFragment"
+            app:destination="@id/repositoryFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="userName"
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/repositoryFragment"
+        android:name="br.com.githubfinder.ui.screens.repository.RepositoryFragment"
+        android:label="Detalhes"
+        tools:layout="@layout/fragment_repository" >
+        <argument
+            android:name="repoDetails"
+            app:argType="br.com.githubfinder.data.model.Repo[]" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </fragment>
+</navigation>

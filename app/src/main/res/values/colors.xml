@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9c27b0</color>
+    <color name="colorPrimaryDark">#6a0080</color>
+    <color name="colorAccent">@color/algaeGreen</color>
+    <color name="charcoalGrey">#363f51</color>
+    <color name="lightGrey">#b0b9be</color>
+    <color name="lightPaleGrey">#fafafa</color>
+    <color name="algaeGreen">#20c571</color>
+    <color name="ic_gitlogo_background">@color/colorPrimary</color>
+</resources>

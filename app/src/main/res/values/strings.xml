@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">GitHub Finder</string>
+    <string name="logo_github_description">Logo GitHub</string>
+    <string name="arrow_icon_description">arrow icon</string>
+    <string name="username_input_hint">Nome do usuário</string>
+    <string name="bio_lorem_text_tools">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</string>
+    <string name="avatar_image_description">Avatar image</string>
+    <string name="repo_text">Repositórios</string>
+    <string name="fork_icon_description">fork icon</string>
+    <string name="star_icon_description">star icon</string>
+    <string name="repo_description">Descrição</string>
+    <string name="issues_text">Issues</string>
+    <string name="git_button_text">Visitar perfil no GitHub</string>
+    <string name="issues_closed_text">Fechadas:</string>
+    <string name="issues_open_text">Abertas:</string>
+    <string name="issues_icon_description">issues icon</string>
+    <string name="creation_date_text">Data de Criação</string>
+    <string name="creation_date_icon_description">creation date icon</string>
+    <string name="description_icon_desc">description icon</string>
+</resources>
