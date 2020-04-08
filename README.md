@@ -24,3 +24,9 @@ A aplicação é simples, bastando que entre com o nome de usuário no campo ind
 <div align=center margin= auto> 
   <img src="img.png"  width=80%>
 </div>
+
+
+## TODO
+
+- Apenas 30 resultados são exibidos por vez por conta da paginação da API. Contornar isso.
+- Adicionar testes de unidade.
