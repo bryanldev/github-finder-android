@@ -29,4 +29,3 @@ A aplicação é simples, bastando que entre com o nome de usuário no campo ind
 ## TODO
 
 - Apenas 30 resultados são exibidos por vez por conta da paginação da API. Contornar isso.
-- Adicionar testes de unidade.
