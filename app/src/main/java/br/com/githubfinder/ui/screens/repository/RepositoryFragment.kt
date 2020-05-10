@@ -10,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import br.com.githubfinder.R
 import br.com.githubfinder.data.model.Issue
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.databinding.FragmentRepositoryBinding
 import br.com.githubfinder.util.brazilDateFormat
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 class RepositoryFragment : Fragment() {
@@ -42,11 +45,21 @@ class RepositoryFragment : Fragment() {
         viewModel.getOpenIssues(userName, repoDetails)
         viewModel.getClosedIssues(userName, repoDetails)
 
+        toolBarConfig()
         setObservables()
         setListener(repoDetails)
         setFields()
 
         return binding.root
+    }
+
+    private fun toolBarConfig() {
+        val repoDetails = args.repoDetails
+
+        binding.toolbar.topAppBar.title = repoDetails[0].name
+        binding.toolbar.topAppBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setObservables() {
@@ -78,9 +91,6 @@ class RepositoryFragment : Fragment() {
 
     private fun setFields() {
         val repoDetails = args.repoDetails
-
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title =
-            repoDetails[0].name
 
         binding.apply {
             descriptionText.text = repoDetails[0].description

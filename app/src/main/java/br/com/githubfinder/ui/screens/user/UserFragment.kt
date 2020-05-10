@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.githubfinder.R
 import br.com.githubfinder.data.model.User
@@ -16,6 +17,7 @@ import br.com.githubfinder.ui.databinding.RepoItem
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 class UserFragment : Fragment() {
@@ -42,10 +44,18 @@ class UserFragment : Fragment() {
 
         viewModel.getUser(userName)
         viewModel.getRepos(userName)
+        toolBarConfig()
         setObservables()
         initRecyclerView()
 
         return binding.root
+    }
+
+    private fun toolBarConfig() {
+        binding.toolbar.topAppBar.title = getString(R.string.about)
+        binding.toolbar.topAppBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setObservables() {

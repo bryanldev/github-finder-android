@@ -35,7 +35,6 @@ class SearchFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        hideActionBar()
         setListeners()
         setObservables()
         initRecyclerView()
@@ -56,11 +55,6 @@ class SearchFragment : Fragment() {
         super.onStop()
         (activity as AppCompatActivity).supportActionBar?.setShowHideAnimationEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        hideActionBar()
     }
 
     private fun setListeners() {
@@ -97,13 +91,6 @@ class SearchFragment : Fragment() {
         binding.recyclerviewUsers.apply {
             adapter = groupAdapter
         }
-    }
-
-    @SuppressLint("RestrictedApi")
-    private fun hideActionBar() {
-        (activity as AppCompatActivity).supportActionBar?.setShowHideAnimationEnabled(false)
-        (activity as AppCompatActivity).supportActionBar?.hide()
-
     }
 
     private fun hideKeyboard(view: View?) {

@@ -16,6 +16,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.screens.repository.RepositoryFragment">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/git_button"
             style="@style/StandardButton"
@@ -36,7 +42,7 @@
             android:contentDescription="@string/fork_icon_description"
             android:src="@drawable/fork_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
             android:id="@+id/fork_text"
@@ -51,12 +57,12 @@
             android:id="@+id/star_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/star_icon_description"
             android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="@+id/fork_text"
             app:layout_constraintEnd_toStartOf="@+id/fork_text"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/fork_text" />
 
         <TextView
             android:id="@+id/star_text"
