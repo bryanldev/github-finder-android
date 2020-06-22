@@ -15,12 +15,13 @@
         android:layout_height="match_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:background="@drawable/background_land"
         tools:context=".ui.screens.search.SearchFragment">
 
 
         <TextView
             android:id="@+id/app_title"
-            style="@style/PrimaryTextBold"
+            style="@style/PrimaryText.Bold.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -32,10 +33,10 @@
 
         <EditText
             android:id="@+id/username_input"
-            style="@style/PrimaryText"
+            style="@style/PrimaryText.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/lightGrey"
+            android:textColorHint="@color/lightPaleGrey"
             android:drawableStart="@drawable/ic_search_black"
             android:drawablePadding="5dp"
             android:imeOptions="actionSearch"
