@@ -8,19 +8,14 @@ Bem-vindo ao GitHub Finder, um aplicativo para exibir informações básicas de 
 
 ## Por que?
 
-Este projeto faz parte do meu portfólio pessoal, então eu realmente ficaria feliz com qualquer feedback a respeito do código, estrutura, ou qualquer coisa que possa me tornar um desenvolvedor melhor!
+Este projeto faz parte do meu portfólio pessoal, então eu realmente ficaria feliz com qualquer feedback a respeito do código, estrutura, ou qualquer coisa que possa me tornar um desenvolvedor melhor.
 
 Me mande um e-mail: bryanlds5@gmail.com
 
 Conecte-se comigo no [LinkedIn](www.linkedin.com/in/bryan-leite-dos-santos).
 
-Além disso, você pode usar este projeto da forma como desejar, seja para estudo ou propor suas próprias melhorias.
+Além disso, você pode usar este projeto da forma como desejar, seja para estudo ou para propor suas próprias melhorias.
 
-É um projeto livre 🎉!
-
-## Observações
-
-- Apenas 30 resultados são exibidos por vez a cada requisição (busca), por conta da paginação da API.
 
 ## Funcionalidades
 
@@ -60,6 +55,10 @@ Importe o projeto para o Android Studio e aguarde o Gradle baixar as dependênci
 - [Retrofit](https://square.github.io/retrofit/) - cliente HTTP
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView) - _'A fast circular ImageView perfect for profile images'_
 - [Picasso](https://github.com/square/picasso) - download e cache de imagens
+
+## Observações
+
+- Apenas 30 resultados são exibidos por vez a cada requisição (busca), por conta da paginação da API.
 
 ## Licença
 
