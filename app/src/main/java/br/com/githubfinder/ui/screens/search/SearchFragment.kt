@@ -3,6 +3,7 @@ package br.com.githubfinder.ui.screens.search
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,13 +51,6 @@ class SearchFragment : Fragment() {
         })
     }
 
-    @SuppressLint("RestrictedApi")
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity).supportActionBar?.setShowHideAnimationEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.show()
-    }
-
     private fun setListeners() {
         binding.usernameInput.setOnEditorActionListener { view, actionId, _ ->
             groupAdapter.clear()
@@ -71,7 +65,6 @@ class SearchFragment : Fragment() {
                 else -> false
             }
         }
-
     }
 
     private fun initRecyclerView() {
