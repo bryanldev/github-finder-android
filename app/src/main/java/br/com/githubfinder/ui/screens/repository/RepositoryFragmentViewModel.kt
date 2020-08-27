@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.githubfinder.data.model.Issue
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.data.network.GithubApiService
@@ -36,14 +37,7 @@ class RepositoryFragmentViewModel : ViewModel() {
         get() = _closedIssues
 
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
-    private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-
-    fun getOpenIssues(userName: String, repo: Array<Repo>) = coroutineScope.launch {
+    fun getOpenIssues(userName: String, repo: Array<Repo>) = viewModelScope.launch {
 
         try {
 
@@ -65,7 +59,7 @@ class RepositoryFragmentViewModel : ViewModel() {
 
     }
 
-    fun getClosedIssues(userName: String, repo: Array<Repo>) = coroutineScope.launch {
+    fun getClosedIssues(userName: String, repo: Array<Repo>) = viewModelScope.launch {
         try {
 
             val closedIssuesOptions = userName + "/${repo[0].name}+type:issue+state:closed"
@@ -79,10 +73,4 @@ class RepositoryFragmentViewModel : ViewModel() {
             Log.e("Search Fragment", sw.toString())
         }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
 }

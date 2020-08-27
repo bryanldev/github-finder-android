@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.githubfinder.data.network.GithubApiService
 import br.com.githubfinder.data.network.GithubApiStatus
 import br.com.githubfinder.data.model.User
@@ -30,13 +31,7 @@ class SearchFragmentViewModel : ViewModel(){
     val users: LiveData<List<User>>
         get() = _users
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
-    private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    fun getUsers(userName: String) = coroutineScope.launch {
+    fun getUsers(userName: String) = viewModelScope.launch {
         try {
             _status.value = GithubApiStatus.LOADING
 
@@ -54,11 +49,6 @@ class SearchFragmentViewModel : ViewModel(){
             Log.e("Search Fragment", sw.toString())
         }
 
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 
     fun clearUsers() {
