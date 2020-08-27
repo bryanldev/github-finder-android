@@ -1,17 +1,13 @@
 package br.com.githubfinder.ui.screens.search
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import br.com.githubfinder.databinding.FragmentSearchBinding
@@ -44,7 +40,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setObservables() {
-        viewModel.users.observe(viewLifecycleOwner, Observer { newUsers ->
+        viewModel.users.observe(viewLifecycleOwner, { newUsers ->
             newUsers.forEach { user ->
                 groupAdapter.add(UserItem(user))
             }

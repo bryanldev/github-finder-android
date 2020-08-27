@@ -9,9 +9,6 @@ import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.data.model.User
 import br.com.githubfinder.data.network.GithubApiService
 import br.com.githubfinder.data.network.GithubApiStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.PrintWriter
 import java.io.StringWriter

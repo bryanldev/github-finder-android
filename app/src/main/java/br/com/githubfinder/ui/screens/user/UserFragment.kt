@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -59,11 +58,11 @@ class UserFragment : Fragment() {
     }
 
     private fun setObservables() {
-        viewModel.user.observe(viewLifecycleOwner, Observer { newUser ->
+        viewModel.user.observe(viewLifecycleOwner, { newUser ->
             setFields(newUser)
         })
 
-        viewModel.repos.observe(viewLifecycleOwner, Observer { newRepos ->
+        viewModel.repos.observe(viewLifecycleOwner, { newRepos ->
             newRepos.forEach { repo ->
                 groupAdapter.add(RepoItem(repo))
             }

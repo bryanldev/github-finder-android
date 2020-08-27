@@ -5,19 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.githubfinder.data.model.User
 import br.com.githubfinder.data.network.GithubApiService
 import br.com.githubfinder.data.network.GithubApiStatus
-import br.com.githubfinder.data.model.User
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.PrintWriter
 import java.io.StringWriter
 
 
-
-class SearchFragmentViewModel : ViewModel(){
+class SearchFragmentViewModel : ViewModel() {
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<GithubApiStatus>()

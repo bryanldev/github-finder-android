@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -61,11 +60,11 @@ class RepositoryFragment : Fragment() {
     }
 
     private fun setObservables() {
-        viewModel.openIssue.observe(viewLifecycleOwner, Observer { issue ->
+        viewModel.openIssue.observe(viewLifecycleOwner, { issue ->
             setOpenIssues(issue)
         })
 
-        viewModel.closedIssue.observe(viewLifecycleOwner, Observer { issue ->
+        viewModel.closedIssue.observe(viewLifecycleOwner, { issue ->
             setClosedIssues(issue)
         })
     }
