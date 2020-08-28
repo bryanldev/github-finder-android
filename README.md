@@ -1,20 +1,23 @@
-<h1> GitHub Finder </h1>
-
 <div align=center margin= auto> 
-  <img src="img.png"  width=80%>
+  <img src="img/github_icon.png"  width=20%>
 </div>
+<h2 align="center"> GitHub Finder </h2>
+<p align=center>Aplicativo Android para exibir informações básicas de usuários do <a href="https://github.com/">GitHub.</a></p>
 
-Bem-vindo ao GitHub Finder, um aplicativo para exibir informações básicas de usuários do [GitHub](https://github.com/).
+---
+
+</br>
+<div align=center margin= auto> 
+  <img src="img/screens.png"  width=80%>
+</div>
 
 ## Por que?
 
-Este projeto faz parte do meu portfólio pessoal, então eu realmente ficaria feliz com qualquer feedback a respeito do código, estrutura, ou qualquer coisa que possa me tornar um desenvolvedor melhor.
-
-Me mande um e-mail: bryanlds5@gmail.com
+Este projeto faz parte do meu portfólio pessoal. Eu realmente ficaria feliz com qualquer feedback a respeito do código, estrutura, ou qualquer coisa que possa me tornar um desenvolvedor melhor.
 
 Conecte-se comigo no [LinkedIn](www.linkedin.com/in/bryan-leite-dos-santos).
 
-Além disso, você pode usar este projeto da forma como desejar, seja para estudo ou para propor suas próprias melhorias.
+Fique a vontade para usar este projeto da forma como desejar, seja para estudo ou para propor suas próprias melhorias.
 
 
 ## Funcionalidades
