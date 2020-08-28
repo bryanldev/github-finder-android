@@ -63,6 +63,7 @@ class UserFragment : Fragment() {
         })
 
         viewModel.repos.observe(viewLifecycleOwner, { newRepos ->
+            groupAdapter.clear()
             newRepos.forEach { repo ->
                 groupAdapter.add(RepoItem(repo))
             }
