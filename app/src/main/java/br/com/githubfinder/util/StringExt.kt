@@ -15,8 +15,7 @@ fun String.brazilDateFormat(): String {
     var parseResult = Date()
 
     try {
-
-        parseResult = input.parse(this)
+        parseResult = input.parse(this)!!
 
     } catch (e: ParseException) {
         val sw = StringWriter()
