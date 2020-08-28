@@ -1,4 +1,4 @@
-package br.com.githubfinder.ui
+package br.com.githubfinder
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import br.com.githubfinder.R
 import br.com.githubfinder.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class GitHubFinderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
