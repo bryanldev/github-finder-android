@@ -32,6 +32,12 @@ class RepositoryFragment : Fragment() {
 
         // Inflate the layout for this fragment - fragment_repository.xml
         binding = FragmentRepositoryBinding.inflate((inflater))
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -45,9 +51,7 @@ class RepositoryFragment : Fragment() {
         toolBarConfig()
         setObservables()
         setListener(repoDetails)
-        setFields()
-
-        return binding.root
+        setFields(repoDetails)
     }
 
     private fun toolBarConfig() {
@@ -86,9 +90,7 @@ class RepositoryFragment : Fragment() {
         binding.issuesClosedText.text = issue.totalCount.toString()
     }
 
-    private fun setFields() {
-        val repoDetails = args.repoDetails
-
+    private fun setFields(repoDetails: Array<Repo>) {
         binding.apply {
             descriptionText.text = repoDetails[0].description
             starText.text = repoDetails[0].stargazersCount.toString()
