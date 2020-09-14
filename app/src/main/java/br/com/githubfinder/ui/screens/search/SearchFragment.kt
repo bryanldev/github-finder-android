@@ -12,13 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import br.com.githubfinder.databinding.FragmentSearchBinding
 import br.com.githubfinder.ui.databinding.UserItem
+import br.com.githubfinder.util.autoCleared
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
 class SearchFragment : Fragment() {
 
-    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
-    private lateinit var binding: FragmentSearchBinding
+    private var binding by autoCleared<FragmentSearchBinding>()
+    private var adapter by autoCleared<GroupAdapter<GroupieViewHolder>>()
     private val viewModel: SearchFragmentViewModel by lazy {
         ViewModelProvider(this).get(SearchFragmentViewModel::class.java)
     }
@@ -29,29 +30,40 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment - fragment_user.xml
         binding = FragmentSearchBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
-        setListeners()
-        setObservables()
-        initRecyclerView()
 
         return binding.root
     }
 
-    private fun setObservables() {
-        viewModel.users.observe(viewLifecycleOwner, { newUsers ->
-            newUsers.forEach { user ->
-                groupAdapter.add(UserItem(user))
-            }
-        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        val groupAdapter = GroupAdapter<GroupieViewHolder>()
+        setupAdapter(groupAdapter)
+
+        binding.recyclerviewUsers.adapter = groupAdapter
+        adapter = groupAdapter
+
+        setupEditorActionListener()
+        setupUsersObservable()
     }
 
-    private fun setListeners() {
-        binding.usernameInput.setOnEditorActionListener { view, actionId, _ ->
-            groupAdapter.clear()
-            hideKeyboard(view)
+    private fun setupAdapter(groupAdapter: GroupAdapter<GroupieViewHolder>) {
+        groupAdapter.setOnItemClickListener { item, v ->
+            val userItem = item as UserItem
 
+            val action = SearchFragmentDirections.actionSearchFragmentToUserFragment(
+                userItem.user.userName
+            )
+            v.findNavController().navigate(action)
+        }
+    }
+
+    private fun setupEditorActionListener() {
+        binding.usernameInput.setOnEditorActionListener { view, actionId, _ ->
+            hideKeyboard(view)
+            adapter.clear()
             return@setOnEditorActionListener when (actionId) {
 
                 EditorInfo.IME_ACTION_SEARCH -> {
@@ -63,23 +75,12 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
-        groupAdapter.apply {
-            setOnItemClickListener { item, view ->
-                viewModel.clearUsers()
-
-                val userItem = item as UserItem
-
-                val action = SearchFragmentDirections.actionSearchFragmentToUserFragment(
-                    userItem.user.userName
-                )
-                view.findNavController().navigate(action)
+    private fun setupUsersObservable() {
+        viewModel.users.observe(viewLifecycleOwner, { newUsers ->
+            newUsers.forEach { user ->
+                adapter.add(UserItem(user))
             }
-        }
-
-        binding.recyclerviewUsers.apply {
-            adapter = groupAdapter
-        }
+        })
     }
 
     private fun hideKeyboard(view: View?) {

@@ -13,6 +13,7 @@ import br.com.githubfinder.R
 import br.com.githubfinder.data.model.User
 import br.com.githubfinder.databinding.FragmentUserBinding
 import br.com.githubfinder.ui.databinding.RepoItem
+import br.com.githubfinder.util.autoCleared
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -21,9 +22,9 @@ import kotlinx.android.synthetic.main.toolbar.view.*
 
 class UserFragment : Fragment() {
 
-    private val groupAdapter = GroupAdapter<GroupieViewHolder>()
+    private var binding by autoCleared<FragmentUserBinding>()
+    private var adapter by autoCleared<GroupAdapter<GroupieViewHolder>>()
     private val args: UserFragmentArgs by navArgs()
-    private lateinit var binding: FragmentUserBinding
     private val viewModel: UserFragmentViewModel by lazy {
         ViewModelProvider(this).get(UserFragmentViewModel::class.java)
     }
@@ -32,22 +33,43 @@ class UserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment - fragment_repository.xml
+        binding = FragmentUserBinding.inflate((inflater))
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         // The userName from SearchFragment
         val userName = args.userName
 
-        // Inflate the layout for this fragment - fragment_repository.xml
-        binding = FragmentUserBinding.inflate((inflater))
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
         viewModel.getUser(userName)
         viewModel.getRepos(userName)
+
+        val groupAdapter = GroupAdapter<GroupieViewHolder>()
+        setupAdapter(groupAdapter)
+
+        binding.recyclerviewRepo.adapter = groupAdapter
+        adapter = groupAdapter
+
         toolBarConfig()
         setObservables()
-        initRecyclerView()
+    }
 
-        return binding.root
+    private fun setupAdapter(groupAdapter: GroupAdapter<GroupieViewHolder>) {
+        groupAdapter.setOnItemClickListener { item, view ->
+            val userName = args.userName
+            val repoItem = item as RepoItem
+
+            val action = UserFragmentDirections.actionUserFragmentToRepositoryFragment(
+                arrayOf(repoItem.repo), userName
+            )
+            view.findNavController().navigate(action)
+        }
     }
 
     private fun toolBarConfig() {
@@ -63,35 +85,14 @@ class UserFragment : Fragment() {
         })
 
         viewModel.repos.observe(viewLifecycleOwner, { newRepos ->
-            groupAdapter.clear()
-            newRepos.forEach { repo ->
-                groupAdapter.add(RepoItem(repo))
-            }
+            if (adapter.itemCount == 0)
+                newRepos.forEach { repo ->
+                    adapter.add(RepoItem(repo))
+                }
         })
     }
 
-    private fun initRecyclerView() {
-        groupAdapter.apply {
-            setOnItemClickListener { item, view ->
-                viewModel.clearRepos()
-
-                val userName = args.userName
-                val repoItem = item as RepoItem
-
-                val action = UserFragmentDirections.actionUserFragmentToRepositoryFragment(
-                    arrayOf(repoItem.repo), userName
-                )
-                view.findNavController().navigate(action)
-            }
-        }
-
-        binding.recyclerviewRepo.apply {
-            adapter = groupAdapter
-        }
-    }
-
     private fun setFields(user: User) {
-
         Picasso
             .get()
             .load(user.avatarUrl)
