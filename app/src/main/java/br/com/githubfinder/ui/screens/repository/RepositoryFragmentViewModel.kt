@@ -33,12 +33,12 @@ class RepositoryFragmentViewModel : ViewModel() {
         get() = _closedIssues
 
 
-    fun getOpenIssues(userName: String, repo: Array<Repo>) = viewModelScope.launch {
+    fun getOpenIssues(userName: String, repo: Repo) = viewModelScope.launch {
 
         try {
 
             _status.value = GithubApiStatus.LOADING
-            val openIssuesOptions = userName + "/${repo[0].name}+type:issue+state:open"
+            val openIssuesOptions = userName + "/${repo.name}+type:issue+state:open"
             val result = apiService.getNumberOfIssues(openIssuesOptions)
 
             _openIssues.value = result
@@ -55,10 +55,10 @@ class RepositoryFragmentViewModel : ViewModel() {
 
     }
 
-    fun getClosedIssues(userName: String, repo: Array<Repo>) = viewModelScope.launch {
+    fun getClosedIssues(userName: String, repo: Repo) = viewModelScope.launch {
         try {
 
-            val closedIssuesOptions = userName + "/${repo[0].name}+type:issue+state:closed"
+            val closedIssuesOptions = userName + "/${repo.name}+type:issue+state:closed"
             val result = apiService.getNumberOfIssues(closedIssuesOptions)
 
             _closedIssues.value = result

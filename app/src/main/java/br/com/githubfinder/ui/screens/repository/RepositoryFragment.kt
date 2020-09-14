@@ -57,7 +57,7 @@ class RepositoryFragment : Fragment() {
     private fun toolBarConfig() {
         val repoDetails = args.repoDetails
 
-        binding.toolbar.topAppBar.title = repoDetails[0].name
+        binding.toolbar.topAppBar.title = repoDetails.name
         binding.toolbar.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -73,11 +73,11 @@ class RepositoryFragment : Fragment() {
         })
     }
 
-    private fun setListener(repoDetails: Array<Repo>) {
+    private fun setListener(repoDetails: Repo) {
         // Takes the user to the git page via browser
         binding.gitButton.setOnClickListener {
             val browserIntent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(repoDetails[0].html_url))
+                Intent(Intent.ACTION_VIEW, Uri.parse(repoDetails.html_url))
             startActivity(browserIntent)
         }
     }
@@ -90,12 +90,12 @@ class RepositoryFragment : Fragment() {
         binding.issuesClosedText.text = issue.totalCount.toString()
     }
 
-    private fun setFields(repoDetails: Array<Repo>) {
+    private fun setFields(repoDetails: Repo) {
         binding.apply {
-            descriptionText.text = repoDetails[0].description
-            starText.text = repoDetails[0].stargazersCount.toString()
-            forkText.text = repoDetails[0].forksCount.toString()
-            creationDateText.text = repoDetails[0].createdAt.brazilDateFormat()
+            descriptionText.text = repoDetails.description
+            starText.text = repoDetails.stargazersCount.toString()
+            forkText.text = repoDetails.forksCount.toString()
+            creationDateText.text = repoDetails.createdAt.brazilDateFormat()
         }
     }
 }

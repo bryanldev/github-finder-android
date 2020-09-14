@@ -66,7 +66,7 @@ class UserFragment : Fragment() {
             val repoItem = item as RepoItem
 
             val action = UserFragmentDirections.actionUserFragmentToRepositoryFragment(
-                arrayOf(repoItem.repo), userName
+                repoItem.repo, userName
             )
             view.findNavController().navigate(action)
         }
