@@ -1,4 +1,4 @@
-package br.com.githubfinder.ui.screens.repo_details
+package br.com.githubfinder.ui.repo_details
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import br.com.githubfinder.data.model.Issue
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.databinding.FragmentRepoDetailsBinding
 import br.com.githubfinder.util.brazilDateFormat

@@ -6,40 +6,36 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="br.com.githubfinder.ui.screens.search.SearchFragment"
+        android:name="br.com.githubfinder.ui.search.SearchFragment"
         android:label=" "
         tools:layout="@layout/fragment_search">
         <action
-            android:id="@+id/action_searchFragment_to_userFragment"
+            android:id="@+id/action_searchFragment_to_repositoryFragment"
             app:destination="@id/repositoryFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="br.com.githubfinder.ui.screens.repository.RepositoryFragment"
+        android:name="br.com.githubfinder.ui.repository.RepositoryFragment"
         android:label="Sobre"
         tools:layout="@layout/fragment_repository">
         <action
-            android:id="@+id/action_userFragment_to_repositoryFragment"
+            android:id="@+id/action_repositoryFragment_to_repoDetailsFragment"
             app:destination="@id/repoDetailsFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
         <argument
-            android:name="userName"
-            android:defaultValue='""'
-            app:argType="string" />
+            android:name="user"
+            app:argType="br.com.githubfinder.data.model.User" />
     </fragment>
     <fragment
         android:id="@+id/repoDetailsFragment"
-        android:name="br.com.githubfinder.ui.screens.repo_details.RepoDetailsFragment"
+        android:name="br.com.githubfinder.ui.repo_details.RepoDetailsFragment"
         android:label="Detalhes"
         tools:layout="@layout/fragment_repo_details" >
         <argument
             android:name="repoDetails"
             app:argType="br.com.githubfinder.data.model.Repo" />
-        <argument
-            android:name="userName"
-            app:argType="string" />
     </fragment>
 </navigation>

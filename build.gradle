@@ -4,7 +4,6 @@ buildscript {
     ext {
         kotlinVersion = '1.4.10'
         navVersion = '2.3.0'
-        groupieVersion = '2.7.2'
         lifecycleVersion = '2.2.0'
         appCompatVersion = '1.2.0'
         materialVersion = '1.2.1'

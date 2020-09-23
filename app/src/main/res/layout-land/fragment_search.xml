@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="br.com.githubfinder.ui.screens.search.SearchFragmentViewModel" />
+            type="br.com.githubfinder.ui.search.SearchFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:background="@drawable/background_land"
-        tools:context=".ui.screens.search.SearchFragment">
+        tools:context=".ui.search.SearchFragment">
 
 
         <TextView

@@ -1,19 +1,19 @@
-package br.com.githubfinder.ui.screens.repository
+package br.com.githubfinder.ui.repo_details
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.githubfinder.data.model.Issue
 import br.com.githubfinder.data.model.Repo
-import br.com.githubfinder.data.model.User
 import br.com.githubfinder.data.network.GithubApiService
 import br.com.githubfinder.data.network.GithubApiStatus
 import kotlinx.coroutines.launch
 import java.io.PrintWriter
 import java.io.StringWriter
 
-class RepositoryFragmentViewModel : ViewModel() {
+class RepoDetailsFragmentViewModel : ViewModel() {
 
     private val apiService = GithubApiService()
 
@@ -24,43 +24,46 @@ class RepositoryFragmentViewModel : ViewModel() {
     val status: LiveData<GithubApiStatus>
         get() = _status
 
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User>
-        get() = _user
+    private val _openIssues = MutableLiveData<Issue>()
+    val openIssue: LiveData<Issue>
+        get() = _openIssues
 
-    private val _repos = MutableLiveData<List<Repo>>()
-    val repos: LiveData<List<Repo>>
-        get() = _repos
+    private val _closedIssues = MutableLiveData<Issue>()
+    val closedIssue: LiveData<Issue>
+        get() = _closedIssues
 
 
-    fun getUser(userName: String) = viewModelScope.launch {
+    fun getOpenIssues(userName: String, repo: Repo) = viewModelScope.launch {
+
         try {
 
-            val user = apiService.getUser(userName)
-
-            _user.value = user
-
-        } catch (e: Exception) {
-            val sw = StringWriter()
-            e.printStackTrace(PrintWriter(sw))
-            Log.e("Search Fragment", e.message.toString())
-            Log.e("Search Fragment", sw.toString())
-        }
-    }
-
-    fun getRepos(userName: String) = viewModelScope.launch {
-        try {
             _status.value = GithubApiStatus.LOADING
+            val openIssuesOptions = userName + "/${repo.name}+type:issue+state:open"
+            val result = apiService.getNumberOfIssues(openIssuesOptions)
 
-            val repos = apiService.listRepos(userName)
+            _openIssues.value = result
 
             _status.value = GithubApiStatus.DONE
-
-            _repos.value = repos
 
         } catch (e: Exception) {
             _status.value = GithubApiStatus.ERROR
 
+            val sw = StringWriter()
+            e.printStackTrace(PrintWriter(sw))
+            Log.e("Search Fragment", sw.toString())
+        }
+
+    }
+
+    fun getClosedIssues(userName: String, repo: Repo) = viewModelScope.launch {
+        try {
+
+            val closedIssuesOptions = userName + "/${repo.name}+type:issue+state:closed"
+            val result = apiService.getNumberOfIssues(closedIssuesOptions)
+
+            _closedIssues.value = result
+
+        } catch (e: Exception) {
             val sw = StringWriter()
             e.printStackTrace(PrintWriter(sw))
             Log.e("Search Fragment", sw.toString())

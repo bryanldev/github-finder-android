@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="br.com.githubfinder.ui.screens.repository.RepositoryFragmentViewModel" />
+            type="br.com.githubfinder.ui.repository.RepositoryFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        tools:context=".ui.screens.repository.RepositoryFragment">
+        tools:context=".ui.repository.RepositoryFragment">
 
         <include
             android:id="@+id/toolbar"

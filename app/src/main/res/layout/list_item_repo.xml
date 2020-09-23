@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="repo"
+            type="br.com.githubfinder.data.model.Repo" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:onClick="@{clickListener}"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
             app:cardForegroundColor="@null"
@@ -33,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:text="@{repo.name}"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Nome do Repositório" />
@@ -47,6 +58,7 @@
                     android:ellipsize="end"
                     android:ems="12"
                     android:maxLines="1"
+                    android:text="@{repo.description}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/repo_name"
                     app:layout_constraintTop_toBottomOf="@+id/repo_name"
