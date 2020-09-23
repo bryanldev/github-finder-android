@@ -2,14 +2,15 @@ package br.com.githubfinder.ui.databinding
 
 import br.com.githubfinder.R
 import br.com.githubfinder.data.model.User
-import br.com.githubfinder.databinding.CardUserBinding
+import br.com.githubfinder.databinding.ListItemRepoBinding
+import br.com.githubfinder.databinding.ListItemUserBinding
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.databinding.BindableItem
 
 
-class UserItem(val user: User) : BindableItem<CardUserBinding>() {
+class UserItem(val user: User) : BindableItem<ListItemUserBinding>() {
 
-    override fun bind(binding: CardUserBinding, position: Int) {
+    override fun bind(binding: ListItemUserBinding, position: Int) {
         binding.userNameText.text = user.userName
         Picasso
             .get()
@@ -21,6 +22,6 @@ class UserItem(val user: User) : BindableItem<CardUserBinding>() {
 
     }
 
-    override fun getLayout(): Int = R.layout.card_user
+    override fun getLayout(): Int = R.layout.list_item_user
 
 }

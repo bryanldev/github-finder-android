@@ -28,7 +28,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment - fragment_user.xml
+        // Inflate the layout for this fragment - fragment_repository.xml
         binding = FragmentSearchBinding.inflate(inflater)
 
         return binding.root
