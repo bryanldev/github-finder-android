@@ -43,13 +43,13 @@ class RepoDetailsFragment : Fragment() {
 
         // From UserFragment
         val repoDetails = args.repoDetails
-        val userName = args.userName
+        //val userName = args.userName
 
-        viewModel.getOpenIssues(userName, repoDetails)
-        viewModel.getClosedIssues(userName, repoDetails)
+//        viewModel.getOpenIssues(userName, repoDetails)
+//        viewModel.getClosedIssues(userName, repoDetails)
 
         toolBarConfig()
-        setObservables()
+        //setObservables()
         setListener(repoDetails)
         setFields(repoDetails)
     }
@@ -63,15 +63,15 @@ class RepoDetailsFragment : Fragment() {
         }
     }
 
-    private fun setObservables() {
-        viewModel.openIssue.observe(viewLifecycleOwner, { issue ->
-            setOpenIssues(issue)
-        })
-
-        viewModel.closedIssue.observe(viewLifecycleOwner, { issue ->
-            setClosedIssues(issue)
-        })
-    }
+//    private fun setObservables() {
+//        viewModel.openIssue.observe(viewLifecycleOwner, { issue ->
+//            setOpenIssues(issue)
+//        })
+//
+//        viewModel.closedIssue.observe(viewLifecycleOwner, { issue ->
+//            setClosedIssues(issue)
+//        })
+//    }
 
     private fun setListener(repoDetails: Repo) {
         // Takes the user to the git page via browser
@@ -82,13 +82,13 @@ class RepoDetailsFragment : Fragment() {
         }
     }
 
-    private fun setOpenIssues(issue: Issue) {
-        binding.issuesOpenText.text = issue.totalCount.toString()
-    }
-
-    private fun setClosedIssues(issue: Issue) {
-        binding.issuesClosedText.text = issue.totalCount.toString()
-    }
+//    private fun setOpenIssues(issue: Issue) {
+//        binding.issuesOpenText.text = issue.totalCount.toString()
+//    }
+//
+//    private fun setClosedIssues(issue: Issue) {
+//        binding.issuesClosedText.text = issue.totalCount.toString()
+//    }
 
     private fun setFields(repoDetails: Repo) {
         binding.apply {
