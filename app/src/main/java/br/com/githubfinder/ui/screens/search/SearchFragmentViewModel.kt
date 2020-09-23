@@ -44,10 +44,5 @@ class SearchFragmentViewModel : ViewModel() {
             e.printStackTrace(PrintWriter(sw))
             Log.e("Search Fragment", sw.toString())
         }
-
-    }
-
-    fun clearUsers() {
-        _users.value = listOf()
     }
 }

@@ -66,9 +66,4 @@ class RepositoryFragmentViewModel : ViewModel() {
             Log.e("Search Fragment", sw.toString())
         }
     }
-
-    fun clearRepos() {
-        _repos.value = listOf()
-    }
-
 }
