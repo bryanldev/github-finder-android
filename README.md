@@ -48,11 +48,11 @@ Importe o projeto para o Android Studio e aguarde o Gradle baixar as dependênci
 
 - Linguagem adotada: [**Kotlin**](https://kotlinlang.org/)
 - [API do GitHub](https://developer.github.com/v3/)
-- Uma arquitetura de atividade única, usando o componente [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) para gerenciar operações de fragmento
-- Camada de apresentação que contém um fragmento (View) e um [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) por tela
+- Uma arquitetura de Activity única, usando o componente [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) para gerenciamento de operações nos Fragments 
+- Camada de apresentação que contém um Fragment (View) e um [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) por tela
 - [Live Data](https://developer.android.com/topic/libraries/architecture/livedata?hl=pt-br)
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding)
-- Suporta mudanças de orientação das telas sem perder estado
+- Suporta mudanças de orientação das telas sem perda de estado
 - [Constraint Layout](https://developer.android.com/training/constraint-layout)
 - [Groupie](https://github.com/lisawray/groupie) - RecyclerView
 - [Retrofit](https://square.github.io/retrofit/) - cliente HTTP
