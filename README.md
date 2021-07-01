@@ -54,7 +54,6 @@ Importe o projeto para o Android Studio e aguarde o Gradle baixar as dependênci
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 - Suporta mudanças de orientação das telas sem perda de estado
 - [Constraint Layout](https://developer.android.com/training/constraint-layout)
-- [Groupie](https://github.com/lisawray/groupie) - RecyclerView
 - [Retrofit](https://square.github.io/retrofit/) - cliente HTTP
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView) - _'A fast circular ImageView perfect for profile images'_
 - [Picasso](https://github.com/square/picasso) - download e cache de imagens
