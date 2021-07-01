@@ -12,8 +12,8 @@
         <action
             android:id="@+id/action_searchFragment_to_repositoryFragment"
             app:destination="@id/repositoryFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/repositoryFragment"
@@ -23,8 +23,8 @@
         <action
             android:id="@+id/action_repositoryFragment_to_repoDetailsFragment"
             app:destination="@id/repoDetailsFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_pop_exit_anim" />
         <argument
             android:name="user"
             app:argType="br.com.githubfinder.data.model.User" />
