@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/repositoryFragment"
-        android:name="br.com.githubfinder.ui.repository.RepositoryFragment"
+        android:name="br.com.githubfinder.ui.repo.RepositoryFragment"
         android:label="Sobre"
         tools:layout="@layout/fragment_repository">
         <action

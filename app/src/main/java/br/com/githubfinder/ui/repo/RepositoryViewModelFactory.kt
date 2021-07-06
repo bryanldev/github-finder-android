@@ -1,4 +1,4 @@
-package br.com.githubfinder.ui.repository
+package br.com.githubfinder.ui.repo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

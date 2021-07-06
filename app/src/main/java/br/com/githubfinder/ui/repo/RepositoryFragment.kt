@@ -1,4 +1,4 @@
-package br.com.githubfinder.ui.repository
+package br.com.githubfinder.ui.repo
 
 import android.os.Bundle
 import android.view.LayoutInflater
