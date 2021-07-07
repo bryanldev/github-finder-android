@@ -4,21 +4,21 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import br.com.githubfinder.R
-import br.com.githubfinder.data.network.GithubApiStatus
+import br.com.githubfinder.vo.enums.Status
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("gitApiStatus")
-fun ImageView.bindStatus(status: GithubApiStatus?) {
+fun ImageView.bindStatus(status: Status?) {
     when (status) {
-        GithubApiStatus.LOADING -> {
+        Status.LOADING -> {
             visibility = View.VISIBLE
             setImageResource(R.drawable.loading_animation)
         }
-        GithubApiStatus.ERROR -> {
+        Status.ERROR -> {
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_connection_error)
         }
-        GithubApiStatus.DONE -> {
+        Status.SUCCESS -> {
             visibility = View.GONE
         }
     }

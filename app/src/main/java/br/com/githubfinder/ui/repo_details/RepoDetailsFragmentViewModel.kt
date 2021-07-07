@@ -7,21 +7,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.githubfinder.data.model.Issue
 import br.com.githubfinder.data.model.Repo
-import br.com.githubfinder.data.network.GithubApiService
-import br.com.githubfinder.data.network.GithubApiStatus
+import br.com.githubfinder.data.network.configuration.GithubApiService
+import br.com.githubfinder.vo.enums.Status
 import kotlinx.coroutines.launch
 import java.io.PrintWriter
 import java.io.StringWriter
 
 class RepoDetailsFragmentViewModel : ViewModel() {
 
-    private val apiService = GithubApiService()
+    private val apiService = GithubApiService.create()
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<GithubApiStatus>()
+    private val _status = MutableLiveData<Status>()
 
     // The external immutable LiveData for the request status
-    val status: LiveData<GithubApiStatus>
+    val status: LiveData<Status>
         get() = _status
 
     private val _openIssues = MutableLiveData<Issue>()
@@ -37,16 +37,16 @@ class RepoDetailsFragmentViewModel : ViewModel() {
 
         try {
 
-            _status.value = GithubApiStatus.LOADING
+            _status.value = Status.LOADING
             val openIssuesOptions = userName + "/${repo.name}+type:issue+state:open"
             val result = apiService.getNumberOfIssues(openIssuesOptions)
 
             _openIssues.value = result
 
-            _status.value = GithubApiStatus.DONE
+            _status.value = Status.SUCCESS
 
         } catch (e: Exception) {
-            _status.value = GithubApiStatus.ERROR
+            _status.value = Status.ERROR
 
             val sw = StringWriter()
             e.printStackTrace(PrintWriter(sw))

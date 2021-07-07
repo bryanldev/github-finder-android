@@ -7,15 +7,15 @@
 
         <variable
             name="viewModel"
-            type="br.com.githubfinder.ui.repository.RepositoryFragmentViewModel" />
+            type="br.com.githubfinder.ui.repo.RepositoryFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_land"
-        tools:context=".ui.repository.RepositoryFragment">
+        android:background="@drawable/background"
+        tools:context=".ui.repo.RepositoryFragment">
 
         <include
             android:id="@+id/toolbar"
@@ -30,12 +30,11 @@
             android:layout_height="90dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/avatar_image_description"
-            android:visibility="gone"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             tools:src="@drawable/github_roxo" />
 
         <TextView
@@ -43,12 +42,13 @@
             style="@style/PrimaryText.Bold.Light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:textAlignment="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/repo_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/repo_text"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_image"
             tools:text="Nome do Usuário" />
 
         <TextView
@@ -57,17 +57,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/repo_text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/username_text" />
 
         <TextView
             android:id="@+id/repo_numbers"
-            android:textColor="@color/lightPaleGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textColor="@color/lightPaleGrey"
             app:layout_constraintBaseline_toBaselineOf="@+id/repo_text"
             app:layout_constraintStart_toEndOf="@+id/repo_text"
             tools:text="(09)" />
@@ -80,19 +80,21 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/repo_text"
+            app:layout_constraintVertical_bias="1.0"
             tools:listitem="@layout/list_item_repo" />
 
         <ImageView
             android:id="@+id/status_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:gitApiStatus="@{viewModel.status}"
-            app:layout_constraintBottom_toBottomOf="@+id/repo_numbers"
-            app:layout_constraintStart_toEndOf="@+id/repo_numbers"
-            app:layout_constraintTop_toTopOf="@+id/repo_numbers"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerview_repo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_text"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
