@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import br.com.githubfinder.R
 import br.com.githubfinder.adapters.UserAdapter
 import br.com.githubfinder.databinding.FragmentSearchBinding
+import br.com.githubfinder.vo.Result
+import com.google.android.material.snackbar.Snackbar
 
 class SearchFragment : Fragment() {
 
@@ -22,7 +26,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment - fragment_search.xml
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
@@ -41,23 +45,50 @@ class SearchFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: UserAdapter) {
-        viewModel.users.observe(viewLifecycleOwner) { users ->
-            adapter.submitList(users)
+        viewModel.users.observe(viewLifecycleOwner) { response ->
+            response?.let { result ->
+                when (result) {
+                    is Result.Success -> {
+                        result.data?.let {
+                            adapter.submitList(it.items)
+                        }
+                    }
+                    is Result.Error -> {
+                        Snackbar.make(
+                            binding.usernameInput,
+                            result.exception.message.toString(),
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.white))
+                            .setTextColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                            .show()
+                    }
+                }
+            }
+        }
+
+        viewModel.status.observe(viewLifecycleOwner) { status ->
+            status?.let {
+                binding.status = status
+            }
         }
     }
 
     private fun setupEditorActionListener() {
         binding.usernameInput.setOnEditorActionListener { view, actionId, _ ->
-            hideKeyboard(view)
-            return@setOnEditorActionListener when (actionId) {
-
-                EditorInfo.IME_ACTION_SEARCH -> {
-                    viewModel.getUsers(binding.usernameInput.text.toString())
-                    true
-                }
-                else -> false
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                doSearch(view)
+                true
+            } else {
+                false
             }
         }
+    }
+
+    private fun doSearch(view: View) {
+        hideKeyboard(view)
+        val query = binding.usernameInput.text.toString()
+        viewModel.setQuery(query)
     }
 
     private fun hideKeyboard(view: View?) {
