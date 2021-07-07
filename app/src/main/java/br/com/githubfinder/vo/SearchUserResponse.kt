@@ -1,4 +1,4 @@
-package br.com.githubfinder.data.network.response
+package br.com.githubfinder.vo
 
 
 import br.com.githubfinder.data.model.User

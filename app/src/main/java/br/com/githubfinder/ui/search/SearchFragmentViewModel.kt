@@ -1,48 +1,38 @@
 package br.com.githubfinder.ui.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import br.com.githubfinder.data.model.User
-import br.com.githubfinder.data.network.GithubApiService
-import br.com.githubfinder.data.network.GithubApiStatus
-import kotlinx.coroutines.launch
-import java.io.PrintWriter
-import java.io.StringWriter
+import androidx.lifecycle.switchMap
+import br.com.githubfinder.data.network.configuration.GithubApiService
+import br.com.githubfinder.data.repository.SearchRepository
+import br.com.githubfinder.vo.Result
+import br.com.githubfinder.vo.SearchUserResponse
+import br.com.githubfinder.vo.enums.Status
+import java.util.*
 
 
 class SearchFragmentViewModel : ViewModel() {
 
-    // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<GithubApiStatus>()
+    private val searchRepository = SearchRepository(GithubApiService.create())
 
-    // The external immutable LiveData for the request status
-    val status: LiveData<GithubApiStatus>
-        get() = _status
+    // Status of the most recent request
+    val status : LiveData<Status> = searchRepository.status
 
+    private val _query = MutableLiveData<String>()
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>>
-        get() = _users
+    fun setQuery(input: String) {
+        val formattedInput = input.lowercase(Locale.getDefault()).trim()
 
-    fun getUsers(userName: String) = viewModelScope.launch {
-        try {
-            _status.value = GithubApiStatus.LOADING
-
-            if (userName.isNotEmpty()) {
-                val apiService = GithubApiService()
-                val users = apiService.searchUsers(userName).items
-                _users.value = users
-            }
-            _status.value = GithubApiStatus.DONE
-        } catch (e: Exception) {
-            _status.value = GithubApiStatus.ERROR
-
-            val sw = StringWriter()
-            e.printStackTrace(PrintWriter(sw))
-            Log.e("Search Fragment", sw.toString())
+        if(formattedInput.isEmpty())
+            return
+        if (formattedInput == _query.value) {
+            return
         }
+        _query.value = formattedInput
+    }
+
+    var users: LiveData<Result<SearchUserResponse?>> = _query.switchMap { search ->
+        searchRepository.searchUser(search)
     }
 }

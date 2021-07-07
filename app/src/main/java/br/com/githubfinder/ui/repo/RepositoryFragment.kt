@@ -1,4 +1,4 @@
-package br.com.githubfinder.ui.repository
+package br.com.githubfinder.ui.repo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.RepoAdapter
 import br.com.githubfinder.data.model.User
-import br.com.githubfinder.databinding.FragmentRepositoryBinding
+import br.com.githubfinder.databinding.FragmentRepoBinding
 import br.com.githubfinder.util.autoCleared
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.toolbar.view.*
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.toolbar.view.*
 
 class RepositoryFragment : Fragment() {
 
-    private var binding by autoCleared<FragmentRepositoryBinding>()
+    private var binding by autoCleared<FragmentRepoBinding>()
     private var adapter by autoCleared<RepoAdapter>()
     private val args: RepositoryFragmentArgs by navArgs()
 
@@ -33,8 +33,8 @@ class RepositoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment - fragment_repo_details.xml
-        binding = FragmentRepositoryBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment - fragment_repository.xml
+        binding = FragmentRepoBinding.inflate(inflater, container, false)
 
         return binding.root
     }
