@@ -13,7 +13,7 @@ interface GithubApiWebService {
     suspend fun searchUsers(@Query("q") userName: String): Response<SearchUserResponse>
 
     @GET("users/{userName}/repos")
-    suspend fun listRepos(@Path("userName") userName: String): List<Repo>
+    suspend fun listRepos(@Path("userName") userName: String): Response<List<Repo>>
 
     @GET("search/issues")
     suspend fun getNumberOfIssues(

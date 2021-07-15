@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.databinding.ListItemRepoBinding
-import br.com.githubfinder.ui.repo.RepositoryFragmentDirections
+import br.com.githubfinder.ui.repo.RepoFragmentDirections
 
 class RepoAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepoDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,7 +43,7 @@ class RepoViewHolder(
         repo: Repo,
         view: View
     ) {
-        val direction = RepositoryFragmentDirections.actionRepositoryFragmentToRepoDetailsFragment(
+        val direction = RepoFragmentDirections.actionRepositoryFragmentToRepoDetailsFragment(
             repo
         )
         view.findNavController().navigate(direction)

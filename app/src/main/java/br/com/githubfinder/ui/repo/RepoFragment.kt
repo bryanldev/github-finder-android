@@ -4,35 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.RepoAdapter
-import br.com.githubfinder.data.model.User
 import br.com.githubfinder.databinding.FragmentRepoBinding
 import br.com.githubfinder.util.autoCleared
-import com.squareup.picasso.Picasso
+import br.com.githubfinder.vo.Result
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.toolbar.view.*
 
-
-class RepositoryFragment : Fragment() {
+class RepoFragment : Fragment() {
 
     private var binding by autoCleared<FragmentRepoBinding>()
     private var adapter by autoCleared<RepoAdapter>()
-    private val args: RepositoryFragmentArgs by navArgs()
+    private val args: RepoFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<RepositoryFragmentViewModel> {
-        RepositoryViewModelFactory(
-            args.user.userName
-        )
-    }
+    private val viewModel by viewModels<RepoFragmentViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment - fragment_repository.xml
         binding = FragmentRepoBinding.inflate(inflater, container, false)
 
@@ -43,46 +39,49 @@ class RepositoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.user = args.user
 
         loadRepos()
         setupAdapter()
         subscribeUi()
-        setFields()
         toolBarConfig()
     }
 
     private fun loadRepos() {
-        viewModel.getRepos()
+        viewModel.setLogin(args.user.userName)
     }
 
     private fun setupAdapter() {
-        val adapter = RepoAdapter()
-        this.adapter = adapter
+        this.adapter = RepoAdapter()
         binding.recyclerviewRepo.adapter = adapter
     }
 
     private fun subscribeUi() {
         viewModel.repos.observe(viewLifecycleOwner) { repos ->
-            adapter.submitList(repos)
+            repos?.let{ result ->
+                when (result){
+                    is Result.Success -> {
+                        adapter.submitList(result.data)
+                    }
+                    is Result.Error -> {
+                        Snackbar.make(
+                            binding.usernameText,
+                            result.exception.message.toString(),
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.white))
+                            .setTextColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                            .show()
+                    }
+                }
+            }
         }
-    }
 
-    private fun setFields() {
-        val user = args.user
-
-        loadAvatar(user)
-        binding.usernameText.text = user.userName
-        binding.repoNumbers.text = user.publicRepos
-    }
-
-    private fun loadAvatar(user: User) {
-        Picasso
-            .get()
-            .load(user.avatarUrl)
-            .noFade()
-            .placeholder(R.drawable.loading_img)
-            .error(R.drawable.ic_broken_image)
-            .into(binding.avatarImage)
+        viewModel.status.observe(viewLifecycleOwner) { status ->
+            status?.let {
+                binding.status = status
+            }
+        }
     }
 
     private fun toolBarConfig() {
