@@ -38,7 +38,6 @@ class RepoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
         binding.user = args.user
 
         loadRepos()
