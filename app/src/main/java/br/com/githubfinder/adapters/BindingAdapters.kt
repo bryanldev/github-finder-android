@@ -2,10 +2,13 @@ package br.com.githubfinder.adapters
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import br.com.githubfinder.R
+import br.com.githubfinder.util.brazilDateFormat
 import br.com.githubfinder.vo.enums.Status
 import com.squareup.picasso.Picasso
+import java.util.*
 
 @BindingAdapter("gitApiStatus")
 fun ImageView.bindStatus(status: Status?) {
@@ -33,5 +36,12 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
             .placeholder(R.drawable.loading_img)
             .error(R.drawable.ic_broken_image)
             .into(view)
+    }
+}
+
+@BindingAdapter("DateText")
+fun bindDateText(view: TextView, date: Date?){
+    if (date != null) {
+        view.text = date.toString().brazilDateFormat()
     }
 }

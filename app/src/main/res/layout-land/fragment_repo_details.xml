@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="repoInfo"
+            type="br.com.githubfinder.data.model.Repo" />
 
         <variable
-            name="viewModel"
-            type="br.com.githubfinder.ui.repo_details.RepoDetailsFragmentViewModel" />
+            name="callback"
+            type="br.com.githubfinder.ui.repo_details.RepoDetailsFragment.Callback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +34,7 @@
             android:layout_marginStart="16dp"
             android:backgroundTint="@color/white"
             android:text="@string/git_button_text"
+            android:onClick="@{() -> callback.navigate(repoInfo.html_url)}"
             app:layout_constraintBaseline_toBaselineOf="@+id/star_text"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,6 +54,7 @@
             android:textColor="@color/lightPaleGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(repoInfo.forksCount)}"
             app:layout_constraintBottom_toBottomOf="@+id/fork_icon"
             app:layout_constraintEnd_toStartOf="@+id/fork_icon"
             app:layout_constraintTop_toTopOf="@+id/fork_icon"
@@ -71,6 +76,7 @@
             android:textColor="@color/lightPaleGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(repoInfo.stargazersCount)}"
             app:layout_constraintBottom_toBottomOf="@+id/star_icon"
             app:layout_constraintEnd_toStartOf="@+id/star_icon"
             app:layout_constraintTop_toTopOf="@+id/star_icon"
@@ -117,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:text="@{repoInfo.description}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/description_icon"
                     app:layout_constraintTop_toBottomOf="@+id/description_icon"
@@ -141,7 +148,6 @@
                     android:text="@string/creation_date_text"
                     app:layout_constraintBottom_toBottomOf="@+id/creation_date_icon"
                     app:layout_constraintStart_toEndOf="@+id/creation_date_icon"
-                    app:layout_constraintStart_toStartOf="@+id/issue_text"
                     app:layout_constraintTop_toTopOf="@+id/creation_date_icon" />
 
                 <TextView
@@ -150,80 +156,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:DateText="@{repoInfo.createdAt}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/creation_date_icon"
                     app:layout_constraintTop_toBottomOf="@+id/creation_date_icon"
                     tools:text="01/04/1990" />
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/issue_icon"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="24dp"-->
-<!--                    android:contentDescription="@string/issues_icon_description"-->
-<!--                    android:src="@drawable/ic_info_outline"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/creation_date_icon"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/creation_date_text" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/issue_text"-->
-<!--                    style="@style/PrimaryText.Bold.Light"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="2dp"-->
-<!--                    android:text="@string/issues_text"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/issue_icon"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/issue_icon"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/issue_icon" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/issues_open"-->
-<!--                    style="@style/PrimaryText.Light"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="4dp"-->
-<!--                    android:text="@string/issues_open_text"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/issue_icon"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/issue_icon" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/issues_open_text"-->
-<!--                    style="@style/PrimaryText.Light"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="4dp"-->
-<!--                    app:layout_constraintBaseline_toBaselineOf="@+id/issues_open"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/issues_open"-->
-<!--                    tools:text="20" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/issues_closed"-->
-<!--                    style="@style/PrimaryText.Light"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/issues_closed_text"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/issues_open"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/issues_open" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/issues_closed_text"-->
-<!--                    style="@style/PrimaryText.Light"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="4dp"-->
-<!--                    app:layout_constraintBaseline_toBaselineOf="@+id/issues_closed"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/issues_closed"-->
-<!--                    tools:text="158" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/status_image"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    app:gitApiStatus="@{viewModel.status}"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/issue_text"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/issue_text"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/issue_text"-->
-<!--                    tools:ignore="ContentDescription" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

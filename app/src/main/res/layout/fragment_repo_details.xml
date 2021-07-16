@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="repoInfo"
+            type="br.com.githubfinder.data.model.Repo" />
 
         <variable
-            name="viewModel"
-            type="br.com.githubfinder.ui.repo_details.RepoDetailsFragmentViewModel" />
+            name="callback"
+            type="br.com.githubfinder.ui.repo_details.RepoDetailsFragment.Callback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lightPaleGrey"
+            android:text="@{String.valueOf(repoInfo.forksCount)}"
             app:layout_constraintBottom_toBottomOf="@+id/fork_icon"
             app:layout_constraintEnd_toStartOf="@+id/fork_icon"
             app:layout_constraintTop_toTopOf="@+id/fork_icon"
@@ -60,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/lightPaleGrey"
+            android:text="@{String.valueOf(repoInfo.stargazersCount)}"
             app:layout_constraintBottom_toBottomOf="@+id/star_icon"
             app:layout_constraintEnd_toStartOf="@+id/star_icon"
             app:layout_constraintTop_toTopOf="@+id/star_icon"
@@ -128,6 +133,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
+                            android:text="@{repoInfo.description}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/description_icon"
@@ -143,13 +149,13 @@
                     android:id="@+id/card_creation_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="0dp"
                     app:cardForegroundColor="@null"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
 
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card_description">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -187,6 +193,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="24dp"
+                            app:DateText="@{repoInfo.createdAt}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/creation_date_icon"
                             app:layout_constraintTop_toBottomOf="@+id/creation_date_icon"
@@ -194,104 +201,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.card.MaterialCardView>
-
-<!--                <com.google.android.material.card.MaterialCardView-->
-<!--                    android:id="@+id/card_issues"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    app:cardCornerRadius="5dp"-->
-<!--                    app:cardElevation="0dp"-->
-<!--                    app:cardForegroundColor="@null"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/card_creation_date"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/card_creation_date">-->
-
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-<!--                        <ImageView-->
-<!--                            android:id="@+id/issue_icon"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="8dp"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            android:contentDescription="@string/issues_icon_description"-->
-<!--                            android:src="@drawable/ic_info_outline"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/issue_text"-->
-<!--                            style="@style/PrimaryText.Bold"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="2dp"-->
-<!--                            android:text="@string/issues_text"-->
-<!--                            app:layout_constraintBottom_toBottomOf="@+id/issue_icon"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/issue_icon"-->
-<!--                            app:layout_constraintTop_toTopOf="@+id/issue_icon" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/issues_open"-->
-<!--                            style="@style/PrimaryText"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="4dp"-->
-<!--                            android:text="@string/issues_open_text"-->
-<!--                            app:layout_constraintStart_toStartOf="@+id/issue_icon"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/issue_icon" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/issues_open_text"-->
-<!--                            style="@style/PrimaryText"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="4dp"-->
-<!--                            app:layout_constraintBaseline_toBaselineOf="@+id/issues_open"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/issues_open"-->
-<!--                            tools:text="20" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/issues_closed"-->
-<!--                            style="@style/PrimaryText"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginBottom="8dp"-->
-<!--                            android:text="@string/issues_closed_text"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="@+id/issues_open"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/issues_open" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/issues_closed_text"-->
-<!--                            style="@style/PrimaryText"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="4dp"-->
-<!--                            android:layout_marginEnd="24dp"-->
-<!--                            app:layout_constraintBaseline_toBaselineOf="@+id/issues_closed"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/issues_closed"-->
-<!--                            tools:text="158" />-->
-
-<!--                        <ImageView-->
-<!--                            android:id="@+id/status_image"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="3dp"-->
-<!--                            android:layout_marginStart="8dp"-->
-<!--                            app:gitApiStatus="@{viewModel.status}"-->
-<!--                            app:layout_constraintBottom_toBottomOf="@+id/issue_text"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/issue_text"-->
-<!--                            app:layout_constraintTop_toTopOf="@+id/issue_text"-->
-<!--                            tools:ignore="ContentDescription" />-->
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-<!--                </com.google.android.material.card.MaterialCardView>-->
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -307,6 +216,7 @@
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/white"
             android:text="@string/git_button_text"
+            android:onClick="@{() -> callback.navigate(repoInfo.html_url)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

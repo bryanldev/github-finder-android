@@ -11,7 +11,7 @@ import java.util.*
 @SuppressLint("SimpleDateFormat")
 fun String.brazilDateFormat(): String {
     val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    val output = SimpleDateFormat("yyyy-MM-dd")
+    val output = SimpleDateFormat("dd-MM-yyyy")
     var parseResult = Date()
 
     try {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.databinding.ListItemRepoBinding
 import br.com.githubfinder.ui.repo.RepoFragmentDirections
+import br.com.githubfinder.util.brazilDateFormat
 
 class RepoAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepoDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
