@@ -11,10 +11,6 @@
         <variable
             name="user"
             type="br.com.githubfinder.data.model.User" />
-
-        <variable
-            name="viewModel"
-            type="br.com.githubfinder.ui.repo.RepoFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
