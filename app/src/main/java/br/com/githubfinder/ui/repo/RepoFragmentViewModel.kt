@@ -5,18 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import br.com.githubfinder.data.model.Repo
-import br.com.githubfinder.data.network.configuration.GithubApiService
-import br.com.githubfinder.data.repository.RepoRepository
+import br.com.githubfinder.data.repository.GithubRepository
 import br.com.githubfinder.util.AbsentLiveData
 import br.com.githubfinder.vo.Result
 import br.com.githubfinder.vo.enums.Status
 
-class RepoFragmentViewModel : ViewModel() {
-
-    private val repoRepository = RepoRepository(GithubApiService.create())
+class RepoFragmentViewModel(private val repository: GithubRepository) : ViewModel() {
 
     // Status of the most recent request
-    val status : LiveData<Status> = repoRepository.status
+    val status : LiveData<Status> = repository.status
 
     private val _login = MutableLiveData<String?>()
 
@@ -24,7 +21,7 @@ class RepoFragmentViewModel : ViewModel() {
         if (login == null) {
             AbsentLiveData.create()
         } else {
-            repoRepository.getRepos(login)
+            repository.getRepos(login)
         }
     }
 

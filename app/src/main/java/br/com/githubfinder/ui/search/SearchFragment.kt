@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.UserAdapter
 import br.com.githubfinder.databinding.FragmentSearchBinding
+import br.com.githubfinder.di.Injection
 import br.com.githubfinder.vo.Result
 import com.google.android.material.snackbar.Snackbar
 
@@ -20,7 +21,9 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchFragmentViewModel by lazy {
-        ViewModelProvider(this).get(SearchFragmentViewModel::class.java)
+        ViewModelProvider(this, Injection.provideSearchFragmentViewModelFactory()).get(
+            SearchFragmentViewModel::class.java
+        )
     }
 
     override fun onCreateView(
@@ -59,8 +62,18 @@ class SearchFragment : Fragment() {
                             result.exception.message.toString(),
                             Snackbar.LENGTH_LONG
                         )
-                            .setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.white))
-                            .setTextColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                            .setBackgroundTint(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.white
+                                )
+                            )
+                            .setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.colorPrimary
+                                )
+                            )
                             .show()
                     }
                 }

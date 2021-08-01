@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.RepoAdapter
 import br.com.githubfinder.databinding.FragmentRepoBinding
+import br.com.githubfinder.di.Injection.provideRepoFragmentViewModelFactory
 import br.com.githubfinder.util.autoCleared
 import br.com.githubfinder.vo.Result
 import com.google.android.material.snackbar.Snackbar
@@ -23,7 +24,12 @@ class RepoFragment : Fragment() {
     private var adapter by autoCleared<RepoAdapter>()
     private val args: RepoFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<RepoFragmentViewModel>()
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            provideRepoFragmentViewModelFactory()
+        ).get(RepoFragmentViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +63,8 @@ class RepoFragment : Fragment() {
 
     private fun subscribeUi() {
         viewModel.repos.observe(viewLifecycleOwner) { repos ->
-            repos?.let{ result ->
-                when (result){
+            repos?.let { result ->
+                when (result) {
                     is Result.Success -> {
                         adapter.submitList(result.data)
                     }
@@ -68,8 +74,18 @@ class RepoFragment : Fragment() {
                             result.exception.message.toString(),
                             Snackbar.LENGTH_LONG
                         )
-                            .setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.white))
-                            .setTextColor(ContextCompat.getColor(requireContext(),R.color.colorPrimary))
+                            .setBackgroundTint(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.white
+                                )
+                            )
+                            .setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.colorPrimary
+                                )
+                            )
                             .show()
                     }
                 }
@@ -89,6 +105,4 @@ class RepoFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
-
 }
