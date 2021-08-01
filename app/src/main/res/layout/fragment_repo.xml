@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="status"
+            type="br.com.githubfinder.vo.enums.Status" />
 
         <variable
-            name="viewModel"
-            type="br.com.githubfinder.ui.repo.RepositoryFragmentViewModel" />
+            name="user"
+            type="br.com.githubfinder.data.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        tools:context=".ui.repo.RepositoryFragment">
+        tools:context=".ui.repo.RepoFragment">
 
         <include
             android:id="@+id/toolbar"
@@ -30,6 +33,7 @@
             android:layout_height="90dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/avatar_image_description"
+            app:imageFromUrl="@{user.avatarUrl}"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +50,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:textAlignment="center"
+            android:text="@{user.userName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avatar_image"
@@ -68,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="@color/lightPaleGrey"
+            android:text="@{user.publicRepos}"
             app:layout_constraintBaseline_toBaselineOf="@+id/repo_text"
             app:layout_constraintStart_toEndOf="@+id/repo_text"
             tools:text="(09)" />
@@ -90,7 +96,7 @@
             android:id="@+id/status_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:gitApiStatus="@{viewModel.status}"
+            app:gitApiStatus="@{status}"
             app:layout_constraintBottom_toTopOf="@+id/recyclerview_repo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

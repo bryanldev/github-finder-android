@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="status"
+            type="br.com.githubfinder.vo.enums.Status" />
 
         <variable
-            name="viewModel"
-            type="br.com.githubfinder.ui.repo.RepositoryFragmentViewModel" />
+            name="user"
+            type="br.com.githubfinder.data.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_land"
-        tools:context=".ui.repo.RepositoryFragment">
+        tools:context=".ui.repo.RepoFragment">
 
         <include
             android:id="@+id/toolbar"
@@ -31,6 +34,7 @@
             android:layout_marginTop="8dp"
             android:contentDescription="@string/avatar_image_description"
             android:visibility="gone"
+            app:imageFromUrl="@{user.avatarUrl}"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:text="@{user.userName}"
             app:layout_constraintBaseline_toBaselineOf="@+id/repo_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -68,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:text="@{user.publicRepos}"
             app:layout_constraintBaseline_toBaselineOf="@+id/repo_text"
             app:layout_constraintStart_toEndOf="@+id/repo_text"
             tools:text="(09)" />
@@ -89,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:gitApiStatus="@{viewModel.status}"
+            app:gitApiStatus="@{status}"
             app:layout_constraintBottom_toBottomOf="@+id/repo_numbers"
             app:layout_constraintStart_toEndOf="@+id/repo_numbers"
             app:layout_constraintTop_toTopOf="@+id/repo_numbers"
