@@ -19,6 +19,7 @@ buildscript {
         androidXLegacySupportVersion = '1.0.0'
         androidXTestCoreVersion = '1.4.0'
         androidXTestExtKotlinRunnerVersion = '1.1.3'
+        paging_version = "3.0.0"
     }
     repositories {
         google()

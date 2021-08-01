@@ -67,6 +67,7 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "androidx.legacy:legacy-support-v4:$androidXLegacySupportVersion"
+    implementation("androidx.paging:paging-runtime:$paging_version")
 
     // Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
