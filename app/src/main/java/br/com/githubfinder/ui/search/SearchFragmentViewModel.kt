@@ -4,20 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
-import br.com.githubfinder.data.network.configuration.GithubApiService
-import br.com.githubfinder.data.repository.SearchRepository
+import br.com.githubfinder.data.repository.GithubRepository
 import br.com.githubfinder.vo.Result
 import br.com.githubfinder.vo.SearchUserResponse
 import br.com.githubfinder.vo.enums.Status
 import java.util.*
 
 
-class SearchFragmentViewModel : ViewModel() {
-
-    private val searchRepository = SearchRepository(GithubApiService.create())
+class SearchFragmentViewModel(private val repository: GithubRepository) : ViewModel() {
 
     // Status of the most recent request
-    val status : LiveData<Status> = searchRepository.status
+    val status : LiveData<Status> = repository.status
 
     private val _query = MutableLiveData<String>()
 
@@ -33,6 +30,6 @@ class SearchFragmentViewModel : ViewModel() {
     }
 
     var users: LiveData<Result<SearchUserResponse?>> = _query.switchMap { search ->
-        searchRepository.searchUser(search)
+        repository.searchUser(search)
     }
 }
