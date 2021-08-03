@@ -7,21 +7,21 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.databinding.SearchLoadStateFooterViewItemBinding
 
-class UsersLoadStateAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<UsersLoadStateViewHolder>() {
-    override fun onBindViewHolder(holder: UsersLoadStateViewHolder, loadState: LoadState) {
+class LoadStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadStateViewHolder>() {
+    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): UsersLoadStateViewHolder {
-        return UsersLoadStateViewHolder.create(parent, retry)
+    ): LoadStateViewHolder {
+        return LoadStateViewHolder.create(parent, retry)
     }
 }
 
-class UsersLoadStateViewHolder(
+class LoadStateViewHolder(
     private val binding: SearchLoadStateFooterViewItemBinding,
     retry: () -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -38,8 +38,8 @@ class UsersLoadStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): UsersLoadStateViewHolder {
-            return UsersLoadStateViewHolder(
+        fun create(parent: ViewGroup, retry: () -> Unit): LoadStateViewHolder {
+            return LoadStateViewHolder(
                 SearchLoadStateFooterViewItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,

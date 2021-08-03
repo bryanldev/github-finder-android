@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.UserAdapter
-import br.com.githubfinder.adapters.UsersLoadStateAdapter
+import br.com.githubfinder.adapters.LoadStateAdapter
 import br.com.githubfinder.databinding.FragmentSearchBinding
 import br.com.githubfinder.di.Injection
 import com.google.android.material.snackbar.Snackbar
@@ -59,7 +59,7 @@ class SearchFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerviewUsers.adapter = adapter.withLoadStateFooter(
-            footer = UsersLoadStateAdapter { adapter.retry() }
+            footer = LoadStateAdapter { adapter.retry() }
         )
 
         adapter.addLoadStateListener { loadState ->

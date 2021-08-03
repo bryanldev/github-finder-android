@@ -17,6 +17,8 @@ interface GithubApiWebService {
 
     @GET("users/{userName}/repos")
     suspend fun listRepos(
-        @Path("userName") userName: String
-    ): Response<List<Repo>>
+        @Path("userName") userName: String,
+        @Query("page") page: Int,
+        @Query("per_page") itemsPerPage: Int
+    ): List<Repo>
 }

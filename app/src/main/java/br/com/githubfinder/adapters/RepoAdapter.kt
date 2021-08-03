@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import br.com.githubfinder.databinding.ListItemRepoBinding
 import br.com.githubfinder.ui.repo.RepoFragmentDirections
 import br.com.githubfinder.util.brazilDateFormat
 
-class RepoAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepoDiffCallBack()) {
+class RepoAdapter : PagingDataAdapter<Repo, RecyclerView.ViewHolder>(RepoDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return RepoViewHolder(
             ListItemRepoBinding.inflate(
@@ -50,7 +51,7 @@ class RepoViewHolder(
         view.findNavController().navigate(direction)
     }
 
-    fun bind(item: Repo) {
+    fun bind(item: Repo?) {
         binding.apply {
             repo = item
             executePendingBindings()
