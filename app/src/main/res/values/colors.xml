@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#001014</color>
     <color name="colorAccent">#E98333</color>
     <color name="lightPaleGrey">#fafafa</color>
+    <color name="gray">#757575</color>
     <color name="white">#ffffff</color>
     <color name="ic_gitlogo_background">@color/colorPrimary</color>
 </resources>
