@@ -17,4 +17,6 @@
     <string name="creation_date_icon_description">creation date icon</string>
     <string name="description_icon_desc">description icon</string>
     <string name="about">Sobre</string>
+    <string name="retry">Retry</string>
+    <string name="sem_resultados">Sem resultados</string>
 </resources>

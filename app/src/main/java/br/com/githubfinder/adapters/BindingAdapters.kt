@@ -1,9 +1,14 @@
 package br.com.githubfinder.adapters
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.R
 import br.com.githubfinder.util.brazilDateFormat
 import br.com.githubfinder.vo.enums.Status
@@ -24,6 +29,16 @@ fun ImageView.bindStatus(status: Status?) {
         Status.SUCCESS -> {
             visibility = View.GONE
         }
+    }
+}
+
+@BindingAdapter("visibilityByLoadingStatus")
+fun setVisibility(view: View, status: LoadState) {
+    when(view) {
+        is RecyclerView -> view.isVisible = status is LoadState.NotLoading
+        is ProgressBar -> view.isVisible = status is LoadState.Loading
+        is Button -> view.isVisible = status is LoadState.Error
+        is TextView -> view.isVisible = status is LoadState.Error
     }
 }
 
