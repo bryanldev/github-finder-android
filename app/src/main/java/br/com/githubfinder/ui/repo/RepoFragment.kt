@@ -81,6 +81,8 @@ class RepoFragment : Fragment() {
 
             checkLoadingErrors(loadState)
         }
+
+        
     }
 
     private fun subscribeUi() {
