@@ -11,7 +11,6 @@ import br.com.githubfinder.data.model.User
 import br.com.githubfinder.data.network.webservice.GithubApiWebService
 import br.com.githubfinder.data.repository.paging.GitHubRepoPagingSource
 import br.com.githubfinder.data.repository.paging.GithubUsersPagingSource
-import br.com.githubfinder.vo.enums.Status
 
 class GithubRepository(private val service: GithubApiWebService) {
 

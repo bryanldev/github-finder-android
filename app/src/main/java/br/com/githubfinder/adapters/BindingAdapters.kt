@@ -11,26 +11,8 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.R
 import br.com.githubfinder.util.brazilDateFormat
-import br.com.githubfinder.vo.enums.Status
 import com.squareup.picasso.Picasso
 import java.util.*
-
-@BindingAdapter("gitApiStatus")
-fun ImageView.bindStatus(status: Status?) {
-    when (status) {
-        Status.LOADING -> {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.loading_animation)
-        }
-        Status.ERROR -> {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.ic_connection_error)
-        }
-        Status.SUCCESS -> {
-            visibility = View.GONE
-        }
-    }
-}
 
 @BindingAdapter("visibilityByLoadingStatus")
 fun setVisibility(view: View, status: LoadState) {
