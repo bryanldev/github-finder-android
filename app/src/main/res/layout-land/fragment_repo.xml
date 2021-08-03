@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="status"
-            type="br.com.githubfinder.vo.enums.Status" />
+            name="loadingStatus"
+            type="androidx.paging.LoadState" />
 
         <variable
             name="user"
@@ -83,6 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
+            app:visibilityByLoadingStatus="@{loadingStatus}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,16 +91,29 @@
             app:layout_constraintTop_toBottomOf="@+id/repo_text"
             tools:listitem="@layout/list_item_repo" />
 
-        <ImageView
-            android:id="@+id/status_image"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:visibilityByLoadingStatus="@{loadingStatus}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:id="@+id/retry_button"
+            style="@style/RetryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:gitApiStatus="@{status}"
-            app:layout_constraintBottom_toBottomOf="@+id/repo_numbers"
-            app:layout_constraintStart_toEndOf="@+id/repo_numbers"
-            app:layout_constraintTop_toTopOf="@+id/repo_numbers"
-            tools:ignore="ContentDescription" />
+            android:text="@string/retry"
+            app:visibilityByLoadingStatus="@{loadingStatus}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
