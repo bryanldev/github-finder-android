@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import br.com.githubfinder.data.model.User
 import br.com.githubfinder.databinding.ListItemUserBinding
 import br.com.githubfinder.ui.search.SearchFragmentDirections
 
-class UserAdapter : ListAdapter<User, RecyclerView.ViewHolder>(UserDiffCallBack()) {
+class UserAdapter : PagingDataAdapter<User, RecyclerView.ViewHolder>(UserDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return UserViewHolder(
@@ -50,7 +51,7 @@ class UserViewHolder(
         view.findNavController().navigate(direction)
     }
 
-    fun bind(item: User) {
+    fun bind(item: User?) {
         binding.apply {
             user = item
             executePendingBindings()
