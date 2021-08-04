@@ -11,19 +11,10 @@
   <img src="img/screens.png"  width=80%>
 </div>
 
-## Por que?
-
-Este projeto faz parte do meu portfólio pessoal. Eu realmente ficaria feliz com qualquer feedback a respeito do código, estrutura, ou qualquer coisa que possa me tornar um desenvolvedor melhor.
-
-Conecte-se comigo no [LinkedIn](www.linkedin.com/in/bryan-leite-dos-santos).
-
-Fique a vontade para usar este projeto da forma como desejar, seja para estudo ou para propor suas próprias melhorias.
-
-
 ## Funcionalidades
 
 - Procurar usuários pelo 'username' da plataforma
-- Descobrir os repositórios públicos destes usuários, com informações de: descrição, número de estrelas, forks, data de criação e issues abertas/fechadas.
+- Descobrir os repositórios públicos destes usuários, com informações como: descrição, número de estrelas, forks, data de criação e linguagem.
 - Visitar a página web do perfil
 
 ## Instruções de uso
@@ -48,7 +39,7 @@ Importe o projeto para o Android Studio e aguarde o Gradle baixar as dependênci
 
 - Linguagem adotada: [**Kotlin**](https://kotlinlang.org/)
 - [API do GitHub](https://developer.github.com/v3/)
-- Uma arquitetura de Activity única, usando o componente [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) para gerenciamento de operações nos Fragments 
+- Uma arquitetura de Activity única, usando o componente [Navigation](https://developer.android.com/guide/navigation/navigation-getting-started) para gerenciamento de operações nos Fragments
 - Camada de apresentação que contém um Fragment (View) e um [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) por tela
 - [Live Data](https://developer.android.com/topic/libraries/architecture/livedata?hl=pt-br)
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding)
@@ -57,10 +48,8 @@ Importe o projeto para o Android Studio e aguarde o Gradle baixar as dependênci
 - [Retrofit](https://square.github.io/retrofit/) - cliente HTTP
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView) - _'A fast circular ImageView perfect for profile images'_
 - [Picasso](https://github.com/square/picasso) - download e cache de imagens
-
-## Observações
-
-- Apenas 30 resultados são exibidos por vez a cada requisição (busca), por conta da paginação da API.
+- [Paging v3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+- Injeção de Dependência
 
 ## Licença
 
