@@ -25,6 +25,12 @@
         <item name="android:textColor">@color/lightPaleGrey</item>
     </style>
 
+    <style name="SecondaryText">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
     <style name="TitleText">
         <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">16sp</item>

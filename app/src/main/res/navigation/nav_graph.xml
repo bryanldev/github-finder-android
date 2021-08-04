@@ -20,22 +20,8 @@
         android:name="br.com.githubfinder.ui.repo.RepoFragment"
         android:label="Sobre"
         tools:layout="@layout/fragment_repo">
-        <action
-            android:id="@+id/action_repositoryFragment_to_repoDetailsFragment"
-            app:destination="@id/repoDetailsFragment"
-            app:enterAnim="@animator/nav_default_enter_anim"
-            app:exitAnim="@animator/nav_default_pop_exit_anim" />
         <argument
             android:name="user"
             app:argType="br.com.githubfinder.data.model.User" />
-    </fragment>
-    <fragment
-        android:id="@+id/repoDetailsFragment"
-        android:name="br.com.githubfinder.ui.repo_details.RepoDetailsFragment"
-        android:label="Detalhes"
-        tools:layout="@layout/fragment_repo_details" >
-        <argument
-            android:name="repoDetails"
-            app:argType="br.com.githubfinder.data.model.Repo" />
     </fragment>
 </navigation>

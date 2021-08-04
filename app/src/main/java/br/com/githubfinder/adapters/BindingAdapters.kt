@@ -16,7 +16,7 @@ import java.util.*
 
 @BindingAdapter("visibilityByLoadingStatus")
 fun setVisibility(view: View, status: LoadState) {
-    when(view) {
+    when (view) {
         is RecyclerView -> view.isVisible = status is LoadState.NotLoading
         is ProgressBar -> view.isVisible = status is LoadState.Loading
         is Button -> view.isVisible = status is LoadState.Error
@@ -37,7 +37,7 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 }
 
 @BindingAdapter("DateText")
-fun bindDateText(view: TextView, date: Date?){
+fun bindDateText(view: TextView, date: Date?) {
     if (date != null) {
         view.text = date.toString().brazilDateFormat()
     }
