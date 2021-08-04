@@ -1,17 +1,14 @@
 package br.com.githubfinder.adapters
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.githubfinder.data.model.Repo
 import br.com.githubfinder.databinding.ListItemRepoBinding
-import br.com.githubfinder.ui.repo.RepoFragmentDirections
-import br.com.githubfinder.util.brazilDateFormat
 
 class RepoAdapter : PagingDataAdapter<Repo, RecyclerView.ViewHolder>(RepoDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -35,20 +32,12 @@ class RepoViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     init {
         binding.setClickListener {
-            binding.repo?.let {  repo ->
-                navigateToRepoDetails(repo, it)
+            binding.repo?.let { repo ->
+                val browserIntent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(repo.html_url))
+                it.context.startActivity(browserIntent)
             }
         }
-    }
-
-    private fun navigateToRepoDetails(
-        repo: Repo,
-        view: View
-    ) {
-        val direction = RepoFragmentDirections.actionRepositoryFragmentToRepoDetailsFragment(
-            repo
-        )
-        view.findNavController().navigate(direction)
     }
 
     fun bind(item: Repo?) {
