@@ -21,8 +21,8 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:onClick="@{clickListener}"
             app:cardCornerRadius="5dp"
             app:cardElevation="0dp"
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -51,18 +51,33 @@
                 <TextView
                     android:id="@+id/repo_description"
                     style="@style/PrimaryText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{repo.description}"
+                    app:layout_constraintBottom_toTopOf="@+id/repo_language"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/repo_name"
+                    app:layout_constraintTop_toBottomOf="@+id/repo_name"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Descrição truncada" />
+
+                <TextView
+                    android:id="@+id/repo_language"
+                    style="@style/SecondaryText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:ellipsize="end"
                     android:ems="12"
                     android:maxLines="1"
-                    android:text="@{repo.description}"
+                    android:text="@{repo.language != null ? @string/language(repo.language) : ``}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/repo_name"
-                    app:layout_constraintTop_toBottomOf="@+id/repo_name"
-                    tools:text="Descrição truncada" />
+                    app:layout_constraintEnd_toStartOf="@+id/star_text"
+                    app:layout_constraintStart_toStartOf="@+id/repo_description"
+                    tools:text="Linguagem:" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -74,6 +89,54 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_layers"
                     tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/star_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="@string/star_icon_description"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintBottom_toBottomOf="@+id/repo_language"
+                    app:layout_constraintEnd_toStartOf="@+id/fork_text"
+                    app:layout_constraintTop_toTopOf="@+id/repo_language"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/star_text"
+                    style="@style/PrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="@{String.valueOf(repo.stargazersCount)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/star_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/star_icon"
+                    app:layout_constraintTop_toTopOf="@+id/star_icon"
+                    tools:text="100" />
+
+                <ImageView
+                    android:id="@+id/fork_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/fork_icon_description"
+                    android:src="@drawable/ic_git_branch"
+                    app:layout_constraintBottom_toBottomOf="@+id/star_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/star_icon"
+                    tools:ignore="ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/fork_text"
+                    style="@style/PrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(repo.forksCount)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/fork_icon"
+                    app:layout_constraintEnd_toStartOf="@+id/fork_icon"
+                    app:layout_constraintTop_toTopOf="@+id/fork_icon"
+                    tools:text="100" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

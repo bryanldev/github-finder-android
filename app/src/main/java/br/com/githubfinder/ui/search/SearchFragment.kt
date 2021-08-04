@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import br.com.githubfinder.R
 import br.com.githubfinder.adapters.UserAdapter
@@ -68,30 +69,34 @@ class SearchFragment : Fragment() {
             val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
             showEmptyList(isListEmpty)
 
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.prepend as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
-            errorState?.let {
-                Snackbar.make(
-                    binding.usernameInput,
-                    "\uD83D\uDE28 Wooops ${it.error}",
-                    Snackbar.LENGTH_LONG
+            checkLoadingErrors(loadState)
+        }
+    }
+
+    private fun checkLoadingErrors(loadState: CombinedLoadStates) {
+        val errorState = loadState.source.append as? LoadState.Error
+            ?: loadState.source.prepend as? LoadState.Error
+            ?: loadState.append as? LoadState.Error
+            ?: loadState.prepend as? LoadState.Error
+        errorState?.let {
+            Snackbar.make(
+                binding.usernameInput,
+                "\uD83D\uDE28 Wooops ${it.error}",
+                Snackbar.LENGTH_LONG
+            )
+                .setBackgroundTint(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.white
+                    )
                 )
-                    .setBackgroundTint(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.white
-                        )
+                .setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.colorPrimary
                     )
-                    .setTextColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.colorPrimary
-                        )
-                    )
-                    .show()
-            }
+                )
+                .show()
         }
     }
 
