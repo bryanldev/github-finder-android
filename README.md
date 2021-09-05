@@ -14,7 +14,7 @@
 ## Funcionalidades
 
 - Procurar usuários pelo 'username' da plataforma
-- Descobrir os repositórios públicos destes usuários, com informações como: descrição, número de estrelas, forks, data de criação e linguagem.
+- Descobrir os repositórios públicos destes usuários, com informações como: descrição, número de estrelas, forks e linguagem.
 - Visitar a página web do perfil
 
 ## Instruções de uso
